@@ -11,7 +11,6 @@
   <arg name="min_dist"/>
   <arg name="odometry_topic"/>
 
-  <!-- There are two kinds of maps you can choose, just comment out the one you don’t need like the follow. Have a try. /-->
 
   <node pkg ="map_generator" name ="random_forest" type ="random_forest" output = "screen">    
     <remap from="~odometry"   to="$(arg odometry_topic)"/>    
