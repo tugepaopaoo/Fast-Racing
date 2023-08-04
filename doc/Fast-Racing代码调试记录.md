@@ -106,7 +106,6 @@ traj_server.cpp 文件中获取从 Quadrator.cpp 中订阅的 odom 信息后对�
 
 ## 1.3 编译说明
 
-可以把 airsim_ros_pkgs 包给删了再编译，这里没有用到这个包。
 # 2 文件修改概要
 
 （1）修改启动文件 zhangjiajie.launch 替换为自己修改后的 run_in_sim.launch
