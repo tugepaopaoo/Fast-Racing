@@ -583,8 +583,8 @@ main(int argc, char** argv)
   n.param("covariance_color", cov_color, false);
   n.param("id", ::count, 0);
   n.param("vel_save", vs_, 1);
-  n.param("base_frame", baseFrame, std::string("/world"));
-  n.param("target_frame", target_frame, std::string("/world"));
+  n.param("base_frame", baseFrame, std::string("world"));
+  n.param("target_frame", target_frame, std::string("world"));
   //  n.param("joy_message", joy_topic, std::string("/joy"));
   //  n.param("path_size", ps_, 0);
 

@@ -27,55 +27,69 @@ int main(int argc, char **argv)
     _odom_sub = nh_priv.subscribe("odom", 1, odom_callback);
     config.loadParameters(ros::NodeHandle("~"));
     glbPlanner = new MavGlobalPlanner(config, nh_priv);
-    std::string host_ip = "localhost";
-    nh_priv.getParam("host_ip", host_ip);
-    Eigen::Matrix3d enutoned;
-    enutoned << 0,1,0,
-                1,0,0,
-                0,0,-1;
-    msr::airlib::RpcLibClientBase airsim_client(host_ip);
-    airsim_client.confirmConnection();
+    // std::string host_ip = "localhost";
+    // nh_priv.getParam("host_ip", host_ip);
+    // Eigen::Matrix3d enutoned;
+    // enutoned << 0,1,0,
+    //             1,0,0,
+    //             0,0,-1;
+    // msr::airlib::RpcLibClientBase airsim_client(host_ip);
+    // airsim_client.confirmConnection();
 
-    /*obtain the gate center pose*/
+    // /*obtain the gate center pose*/
+
+    // std::vector<string> gates_list;
+    // gates_list = airsim_client.simListSceneObjects("gate.*");
+    // int gate_num = gates_list.size()/4;
+    // for(int gate_idx = 0;gate_idx<gate_num;gate_idx++){
+    //     //
+    //     Eigen::Vector3d position_0,position_1,position_2,position_3;
+    //     string corner_0 = string("gate")+to_string(gate_idx)+to_string(1);
+    //     string corner_1 = string("gate")+to_string(gate_idx)+to_string(2);
+    //     string corner_2 = string("gate")+to_string(gate_idx)+to_string(3);
+    //     string corner_3 = string("gate")+to_string(gate_idx)+to_string(4);
+        
+    //     msr::airlib::Pose pose_0 = airsim_client.simGetObjectPose(corner_0);
+    //     msr::airlib::Pose pose_1 = airsim_client.simGetObjectPose(corner_1);
+    //     msr::airlib::Pose pose_2 = airsim_client.simGetObjectPose(corner_2);
+    //     msr::airlib::Pose pose_3 = airsim_client.simGetObjectPose(corner_3);
+    //     position_0<<pose_0.position.y(),pose_0.position.x(),-pose_0.position.z();
+    //     position_1<<pose_1.position.y(),pose_1.position.x(),-pose_1.position.z();
+    //     position_2<<pose_2.position.y(),pose_2.position.x(),-pose_2.position.z();
+    //     position_3<<pose_3.position.y(),pose_3.position.x(),-pose_3.position.z();
+    //     Eigen::Vector3d centrl = (position_0+position_1+position_2+position_3)/4;
+    //     gate_list.push_back(centrl);
+    // }
 
     std::vector<string> gates_list;
-    gates_list = airsim_client.simListSceneObjects("gate.*");
-    int gate_num = gates_list.size()/4;
-    for(int gate_idx = 0;gate_idx<gate_num;gate_idx++){
-        //
-        Eigen::Vector3d position_0,position_1,position_2,position_3;
-        string corner_0 = string("gate")+to_string(gate_idx)+to_string(1);
-        string corner_1 = string("gate")+to_string(gate_idx)+to_string(2);
-        string corner_2 = string("gate")+to_string(gate_idx)+to_string(3);
-        string corner_3 = string("gate")+to_string(gate_idx)+to_string(4);
-        
-        msr::airlib::Pose pose_0 = airsim_client.simGetObjectPose(corner_0);
-        msr::airlib::Pose pose_1 = airsim_client.simGetObjectPose(corner_1);
-        msr::airlib::Pose pose_2 = airsim_client.simGetObjectPose(corner_2);
-        msr::airlib::Pose pose_3 = airsim_client.simGetObjectPose(corner_3);
-        position_0<<pose_0.position.y(),pose_0.position.x(),-pose_0.position.z();
-        position_1<<pose_1.position.y(),pose_1.position.x(),-pose_1.position.z();
-        position_2<<pose_2.position.y(),pose_2.position.x(),-pose_2.position.z();
-        position_3<<pose_3.position.y(),pose_3.position.x(),-pose_3.position.z();
-        Eigen::Vector3d centrl = (position_0+position_1+position_2+position_3)/4;
-        gate_list.push_back(centrl);
-    }
+    int gate_num = 3;
+
+    Eigen::Vector3d gate_0(20, 0, 1);
+    gate_list.push_back(gate_0);
+    Eigen::Vector3d gate_1(20, 20, 1);
+    gate_list.push_back(gate_1);
+    Eigen::Vector3d gate_2(-20, 20, 1);
+    gate_list.push_back(gate_2);
+
 
     /*goal gate pose*/
-    Eigen::Vector3d goal_0,goal_1,goal_2,goal_3;
-    string corner_0 = string("goal1");
-    string corner_1 = string("goal2");
-    string corner_2 = string("goal3");
-    string corner_3 = string("goal4");
-    msr::airlib::Pose pose_0 = airsim_client.simGetObjectPose(corner_0);
-    msr::airlib::Pose pose_1 = airsim_client.simGetObjectPose(corner_1);
-    msr::airlib::Pose pose_2 = airsim_client.simGetObjectPose(corner_2);
-    msr::airlib::Pose pose_3 = airsim_client.simGetObjectPose(corner_3);
-    goal_0<<pose_0.position.y(),pose_0.position.x(),-pose_0.position.z();
-    goal_1<<pose_1.position.y(),pose_1.position.x(),-pose_1.position.z();
-    goal_2<<pose_2.position.y(),pose_2.position.x(),-pose_2.position.z();
-    goal_3<<pose_3.position.y(),pose_3.position.x(),-pose_3.position.z();
-    target_pt = (goal_0+goal_1+goal_2+goal_3)/4;
+    // Eigen::Vector3d goal_0,goal_1,goal_2,goal_3;
+    // string corner_0 = string("goal1");
+    // string corner_1 = string("goal2");
+    // string corner_2 = string("goal3");
+    // string corner_3 = string("goal4");
+    // msr::airlib::Pose pose_0 = airsim_client.simGetObjectPose(corner_0);
+    // msr::airlib::Pose pose_1 = airsim_client.simGetObjectPose(corner_1);
+    // msr::airlib::Pose pose_2 = airsim_client.simGetObjectPose(corner_2);
+    // msr::airlib::Pose pose_3 = airsim_client.simGetObjectPose(corner_3);
+    // goal_0<<pose_0.position.y(),pose_0.position.x(),-pose_0.position.z();
+    // goal_1<<pose_1.position.y(),pose_1.position.x(),-pose_1.position.z();
+    // goal_2<<pose_2.position.y(),pose_2.position.x(),-pose_2.position.z();
+    // goal_3<<pose_3.position.y(),pose_3.position.x(),-pose_3.position.z();
+    // target_pt = (goal_0+goal_1+goal_2+goal_3)/4;
+    // std::cout<<"goal: "<<target_pt.transpose()<<std::endl;
+
+    target_pt = Eigen::Vector3d(-20, -20, 1);
     std::cout<<"goal: "<<target_pt.transpose()<<std::endl;
 
     
