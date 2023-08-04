@@ -33,6 +33,7 @@ roslaunch plan_manage visualize.launch
 无人机规划的起点和 odom 中可视化的无人机起点要设置的一致。
 
 文件 se3_node_cpu.cpp / se3_node_cpu.cpp 中第 18 行处设置的规划起点
+
 ```cpp
 start_pos<<0,0,1;
 start_vel<<0,0,0;
@@ -40,6 +41,7 @@ start_acc<<0,0,0;
 ```
 
 文件 simulator.xml 中第 1 行处设置的无人机可视化的初始位置
+
 ```xml
 <arg name="init_x" value="0.0"/>
 <arg name="init_y" value="0.0"/>
@@ -51,6 +53,7 @@ start_acc<<0,0,0;
 仿真中有两处地图参数的设置，均在 run_in_sim.launch 文件中。两处的地图尺寸可以不一致，但是障碍物地图的尺寸要在规划地图的尺寸范围内。不然后面将障碍物地图中障碍物点云赋值到规划地图中时，可能会出错。
 
 第 3 行处的尺寸参数，为仿真出障碍物地图的尺寸大小。
+
 ```xml
 <arg name="map_size_x" value="40.0"/>
 <arg name="map_size_y" value="40.0"/>
@@ -58,6 +61,7 @@ start_acc<<0,0,0;
 ```
 
 第 52行处的尺寸参数，为无人机规划地图的大小。
+
 ```xml
 <param name="map/z_size" value="2.8" type="double"/>
 <param name="map/x_size" value="70" type="double"/>
