@@ -64,11 +64,11 @@ int main(int argc, char **argv)
     std::vector<string> gates_list;
     int gate_num = 3;
 
-    Eigen::Vector3d gate_0(20, 0, 1);
+    Eigen::Vector3d gate_0(0, 20, 1);
     gate_list.push_back(gate_0);
-    Eigen::Vector3d gate_1(20, 20, 1);
+    Eigen::Vector3d gate_1(-20, 20, 1);
     gate_list.push_back(gate_1);
-    Eigen::Vector3d gate_2(-20, 20, 1);
+    Eigen::Vector3d gate_2(-20, -20, 1);
     gate_list.push_back(gate_2);
 
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     // target_pt = (goal_0+goal_1+goal_2+goal_3)/4;
     // std::cout<<"goal: "<<target_pt.transpose()<<std::endl;
 
-    target_pt = Eigen::Vector3d(-20, -20, 1);
+    target_pt = Eigen::Vector3d(20, -20, 1);
     std::cout<<"goal: "<<target_pt.transpose()<<std::endl;
 
     
