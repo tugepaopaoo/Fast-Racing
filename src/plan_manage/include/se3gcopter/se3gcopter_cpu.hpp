@@ -267,7 +267,7 @@ private:
                 h(2) += gAcc;
                 normalizeFDF(h, zB, dzB);
                 //Zb
-                czB << 0.0, zB(2), -zB(1);
+                czB << 0.0, zB(2), -zB(1);   //zB向量的叉乘矩阵的，第一列
                 cdzB << Eigen::RowVector3d::Zero(), dzB.row(2), -dzB.row(1);
                 normalizeFDF(czB, yB, dnczB);
                 //Yb
